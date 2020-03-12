@@ -1,4 +1,4 @@
-FROM php:7.2-apache
+FROM php:7.3-apache
 RUN apt-get update && apt-get install --no-install-recommends -y gnupg && apt-key update -y
 RUN apt-get install --no-install-recommends -y automake \
     bash \
@@ -11,6 +11,7 @@ RUN apt-get install --no-install-recommends -y automake \
     libpq-dev \
     libtool \
     libssl-dev \
+    libzip-dev \
     libghc-zlib-dev \
     libcurl4-gnutls-dev \
     libexpat1-dev \

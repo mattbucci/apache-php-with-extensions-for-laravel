@@ -1,4 +1,4 @@
-FROM php:7.2-apache
+FROM php:7.3-apache
 RUN apt-get update && apt-get install --no-install-recommends -y gnupg && apt-key update -y
 RUN apt-get install --no-install-recommends -y curl \
     libfreetype6-dev \
@@ -6,6 +6,7 @@ RUN apt-get install --no-install-recommends -y curl \
     libpng-dev \
     libpq-dev \
     libtool \
+    libzip-dev \
     default-mysql-client \
     zlib1g-dev \
     vim \
