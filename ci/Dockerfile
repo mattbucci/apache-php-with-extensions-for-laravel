@@ -7,6 +7,7 @@ RUN apt-get install --no-install-recommends -y automake \
     curl \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
+    libldap2-dev \
     libnotify-bin \
     libpng-dev \
     libpq-dev \
@@ -51,8 +52,11 @@ RUN a2enmod proxy \
 # Install Pecl Dependencies
 RUN pecl install grpc
 
-# Configure GD for Glide Image Resizing
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && docker-php-ext-install pdo pdo_mysql pdo_pgsql pgsql zip mysqli gd opcache pcntl exif bcmath && docker-php-ext-enable grpc
+# Configure PHP Extensions: GD for Glide Image Resizing, LDAP for authentication and GRPC for Firebase
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
+    docker-php-ext-configure ldap --with-libdir = lib / x86_64-linux-gnu /
+RUN docker-php-ext-install pdo pdo_mysql pdo_pgsql pgsql zip mysqli gd opcache pcntl exif bcmath ldap
+RUN docker-php-ext-enable grpc
 
 # Install Composer with prestissimo for faster downloads
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
