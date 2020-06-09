@@ -54,7 +54,7 @@ RUN pecl install grpc
 
 # Configure PHP Extensions: GD for Glide Image Resizing, LDAP for authentication and GRPC for Firebase
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
-    docker-php-ext-configure ldap --with-libdir = lib / x86_64-linux-gnu /
+    docker-php-ext-configure ldap --with-libdir=/lib/x86_64-linux-gnu/
 RUN docker-php-ext-install pdo pdo_mysql pdo_pgsql pgsql zip mysqli gd opcache pcntl exif bcmath ldap
 RUN docker-php-ext-enable grpc
 
