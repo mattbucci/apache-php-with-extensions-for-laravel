@@ -59,15 +59,14 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
 RUN docker-php-ext-install pdo pdo_mysql pdo_pgsql pgsql zip mysqli gd opcache pcntl exif bcmath ldap
 RUN docker-php-ext-enable grpc
 
-# Install Composer with prestissimo for faster downloads
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
-    composer global require "hirak/prestissimo:^0.3"
+# Install Composer 2 
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Install AWS CLI, we need it for deployment tooling, but you may not
 RUN pip install awscli && ln -s /usr/local/bin/aws /usr/bin/aws
 
 # Install nodejs
-RUN curl -sL https://deb.nodesource.com/setup_11.x  | bash && apt-get install --no-install-recommends -y nodejs && npm install -g gulp bower
+RUN curl -sL https://deb.nodesource.com/setup_14.x  | bash && apt-get install --no-install-recommends -y nodejs && npm install -g gulp bower
 
 # Install git lfs
 RUN wget https://github.com/git/git/archive/v2.21.0.zip -O git.zip && \
