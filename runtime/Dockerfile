@@ -1,5 +1,5 @@
 FROM php:8.1-apache
-RUN apt-get update && apt-get install --no-install-recommends -y gnupg && apt-key update -y
+RUN apt-get update && apt-get install --no-install-recommends -y gnupg 
 RUN apt-get install --no-install-recommends -y curl \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
@@ -35,7 +35,7 @@ RUN a2enmod proxy \
 RUN pecl install grpc
 
 # Configure GD for Glide Image Resizing
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
+RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ && \
     docker-php-ext-configure ldap --with-libdir=/lib/x86_64-linux-gnu/
 
 RUN docker-php-ext-install pdo pdo_mysql pdo_pgsql pgsql zip mysqli gd opcache pcntl exif bcmath ldap
